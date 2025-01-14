@@ -14,20 +14,26 @@ target_compile_options(fclock PRIVATE
     -fPIC
 )
 
+# Link order matters: dynamic libs first, then static libs
 target_link_options(fclock PRIVATE
-    -static
+    -static-libgcc
+    -static-libstdc++
+    -Wl,--as-needed
+    -Wl,-Bstatic
+    -Wl,--start-group
 )
-
-# Add dependencies to ensure libraries are built before fclock
-add_dependencies(fclock confuse rgbmatrix)
 
 target_link_libraries(fclock PRIVATE
     rgbmatrix
     confuse
-    -static
-    -pthread
-    -lrt
-    -lm
+    pthread
+    rt
+    m
+)
+
+target_link_options(fclock PRIVATE
+    -Wl,--end-group
+    -Wl,-Bdynamic
 )
 
 # Install targets

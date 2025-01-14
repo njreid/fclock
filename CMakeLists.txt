@@ -49,7 +49,7 @@ ExternalProject_Add(libconfuse-build
     GIT_REPOSITORY    https://github.com/martinh/libconfuse.git
     GIT_TAG          v3.3
     SOURCE_DIR       ${CMAKE_CURRENT_SOURCE_DIR}/external/libconfuse
-    CONFIGURE_COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/external/libconfuse && ./autogen.sh && CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} ./configure --host=armv8-rpi3-linux-gnueabihf --enable-static --disable-shared --prefix=${CMAKE_CURRENT_SOURCE_DIR}/external/libconfuse/install
+    CONFIGURE_COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/external/libconfuse && ./autogen.sh && env CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} "CFLAGS=-O3 -fPIC -march=armv8-a" "CXXFLAGS=-O3 -fPIC -march=armv8-a" "LDFLAGS=-static-libgcc -static-libstdc++" ./configure --host=armv8-rpi3-linux-gnueabihf --enable-static --disable-shared --prefix=${CMAKE_CURRENT_SOURCE_DIR}/external/libconfuse/install
     BUILD_COMMAND    make -C ${CMAKE_CURRENT_SOURCE_DIR}/external/libconfuse
     INSTALL_COMMAND  make -C ${CMAKE_CURRENT_SOURCE_DIR}/external/libconfuse install
     BUILD_IN_SOURCE  1
@@ -61,7 +61,7 @@ ExternalProject_Add(rpi-rgb-led-matrix-build
     GIT_TAG          master
     SOURCE_DIR       ${CMAKE_CURRENT_SOURCE_DIR}/external/rpi-rgb-led-matrix
     CONFIGURE_COMMAND ""
-    BUILD_COMMAND    cd ${CMAKE_CURRENT_SOURCE_DIR}/external/rpi-rgb-led-matrix/lib && make "CC=${CMAKE_C_COMPILER}" "CXX=${CMAKE_CXX_COMPILER}" "CFLAGS=${MATRIX_CFLAGS}" "CXXFLAGS=${MATRIX_CXXFLAGS}"
+    BUILD_COMMAND    cd ${CMAKE_CURRENT_SOURCE_DIR}/external/rpi-rgb-led-matrix/lib && make "CC=${CMAKE_C_COMPILER}" "CXX=${CMAKE_CXX_COMPILER}" "CFLAGS=${MATRIX_CFLAGS}" "CXXFLAGS=${MATRIX_CXXFLAGS}" "LDFLAGS=-static-libgcc" "LDEXTRA=-static-libstdc++"
     BUILD_IN_SOURCE  1
     INSTALL_COMMAND  ""
 )
