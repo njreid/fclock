@@ -1,0 +1,11 @@
+Source: fclock
+Section: utils
+Priority: optional
+Maintainer: System Administrator <root@localhost>
+Build-Depends: debhelper (>= 11), cmake
+
+Package: fclock
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: LED Matrix Clock
+ Flexible LED matrix clock application

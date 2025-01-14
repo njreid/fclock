@@ -1,0 +1,1 @@
+cmd='cd;/home/njr/code/fclock/external/libconfuse;&&;./autogen.sh;&&;CC=/home/njr/opt/x-tools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-gcc;CXX=/home/njr/opt/x-tools/armv8-rpi3-linux-gnueabihf/bin/armv8-rpi3-linux-gnueabihf-g++;./configure;--host=armv8-rpi3-linux-gnueabihf;--enable-static;--disable-shared;--prefix=/home/njr/code/fclock/external/libconfuse/install'

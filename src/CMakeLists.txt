@@ -10,14 +10,24 @@ target_compile_options(fclock PRIVATE
     -g
     -Wextra
     -Wno-unused-parameter
+    -march=armv8-a
+    -fPIC
 )
+
+target_link_options(fclock PRIVATE
+    -static
+)
+
+# Add dependencies to ensure libraries are built before fclock
+add_dependencies(fclock confuse rgbmatrix)
 
 target_link_libraries(fclock PRIVATE
     rgbmatrix
-    ${CONFUSE_LIBRARY}
-    ${PTHREAD_LIBRARY}
-    ${RT_LIBRARY}
-    ${MATH_LIBRARY}
+    confuse
+    -static
+    -pthread
+    -lrt
+    -lm
 )
 
 # Install targets
